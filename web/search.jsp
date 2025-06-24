@@ -22,7 +22,7 @@
         <form action="DispatchServlet">
             Search Value <input type="text" name="txtSearchValue" 
                                 value="${param.txtSearchValue}" /> <br/>
-            <input type="submit" value="Search" name="btAction"/>
+                <input type="submit" value="Search" name="btAction"/>
         </form> <br/>
         <c:set var="searchValue" value="${param.txtSearchValue}"/>
         <c:if test="${not empty searchValue}">
@@ -36,6 +36,7 @@
                             <th>Password</th>
                             <th>Full Name</th>
                             <th>Role</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +49,14 @@
                                 <td>${dto.password}</td>
                                 <td>${dto.fullName}</td>
                                 <td>${dto.role}</td>
+                                <td>
+                                    <c:url var="deleteLink" value="DispatchServlet">
+                                        <c:param name="btAction" value="Delete"/>
+                                        <c:param name="pk" value="${dto.username}"/>
+                                        <c:param name="lastSearchValue" value="${param.txtSearchValue}"/>
+                                    </c:url>
+                                    <a href="${deleteLink}">Delete</a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>

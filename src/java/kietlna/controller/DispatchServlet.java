@@ -31,6 +31,7 @@ public class DispatchServlet extends HttpServlet {
     private final String LOGIN_PAGE = "login.html";
     private final String LOGIN_CONTROLLER = "LoginServlet";
     private final String SEARCH_LASTNAME_CONTROLLER ="SearchLastNameServlet";
+    private final String DELETE_ACCOUNT_CONTROLLER="DeleteAccountServlet";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         // 1. Which button did user click?
@@ -47,6 +48,9 @@ public class DispatchServlet extends HttpServlet {
                         break;
                     case "Search":
                         url = SEARCH_LASTNAME_CONTROLLER;
+                        break;
+                    case "Delete":
+                        url = DELETE_ACCOUNT_CONTROLLER;
                         break;
                     default:
                         throw new AssertionError();
