@@ -32,6 +32,7 @@ public class DispatchServlet extends HttpServlet {
     private final String LOGIN_CONTROLLER = "LoginServlet";
     private final String SEARCH_LASTNAME_CONTROLLER ="SearchLastNameServlet";
     private final String DELETE_ACCOUNT_CONTROLLER="DeleteAccountServlet";
+    private final String CHECK_ACCOUNT_CONTROLLER = "CheckAccountServlet";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         // 1. Which button did user click?
@@ -40,7 +41,7 @@ public class DispatchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             if(button == null){ //first request
-                
+                url = CHECK_ACCOUNT_CONTROLLER; 
             }else{
                 switch (button) {
                     case "Login":

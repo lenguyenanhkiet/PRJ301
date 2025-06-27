@@ -8,6 +8,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -56,6 +57,10 @@ public class LoginServlet extends HttpServlet {
                 HttpSession sesssion = request.getSession();
                 sesssion.setAttribute("USER_INFOR", result);
                 url = SEARCH_PAGE;
+                //Write cookies
+                Cookie cookie = new Cookie(username, password);
+                cookie.setMaxAge(60 * 3);// 3 minutes
+                response.addCookie(cookie);
             }//user is auth
         } catch (SQLException ex) {
             ex.printStackTrace();
