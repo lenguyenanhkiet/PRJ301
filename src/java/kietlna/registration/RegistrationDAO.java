@@ -204,4 +204,46 @@ public class RegistrationDAO implements Serializable {
 
         return result;
     }
+    public boolean updateAccount(String username,String password, boolean isAdmin)
+        throws SQLException, ClassNotFoundException{
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                // 2 model truy van du lieu tu DB 
+                // 2.1 tao cau lenh SQL 
+                // moi menh de cuacau lenh SQl phai viet tren 1 dong 
+                // truoc khi xuong dong phai chen them 1 khoang trang neu khong 
+                // cos loi syntaxFromNear
+                // tat ca cac ten cot phai copy tu DB 
+                // neu khong co loi OBJECT NOT FOUND 
+                String sql = "UPDATE Registration "
+                        + "SET password = ?, isAdmin = ? "
+                        + "WHERE username = ?";
+                // 2.2 to den cau lenh la qua trinh nap cau try van vao create statement Object 
+                // check syntax va excute 
+                stm = con.prepareStatement(sql);
+                // 2.3 execture query       
+                stm.setString(1, password);
+                stm.setBoolean(2, isAdmin);
+                stm.setString(3, username);
+                stm.executeUpdate();
+                int effectRows = stm.executeUpdate();
+                if(effectRows > 0){
+                    result = true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }

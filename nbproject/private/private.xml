@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/web/search.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/src/java/kietlna/controller/LoginServlet.java</file>
             <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/src/java/kietlna/controller/DispatchServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/src/java/kietlna/controller/SearchLastNameServlet.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/src/java/kietlna/controller/CheckAccountServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/src/java/kietlna/controller/DeleteAccountServlet.java</file>
+            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/MVC2SE1809/src/java/kietlna/controller/UpdateAccountServlet.java</file>
         </group>
     </open-files>
 </project-private>
