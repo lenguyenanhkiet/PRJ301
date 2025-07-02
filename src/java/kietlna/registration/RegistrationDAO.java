@@ -204,6 +204,7 @@ public class RegistrationDAO implements Serializable {
 
         return result;
     }
+    
     public boolean updateAccount(String username,String password, boolean isAdmin)
         throws SQLException, ClassNotFoundException{
         boolean result = false;
@@ -230,6 +231,57 @@ public class RegistrationDAO implements Serializable {
                 stm.setBoolean(2, isAdmin);
                 stm.setString(3, username);
                 stm.executeUpdate();
+                int effectRows = stm.executeUpdate();
+                if(effectRows > 0){
+                    result = true;
+                }
+            }
+
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
+
+    public boolean createAccount(RegistrationDTO account) 
+            throws SQLException,ClassNotFoundException{
+        // Them nhieu hoac hon 2 tham so -- can nhac truyen object.
+        // Xem object nao minh co tat ca nhung tham so minh can truyen neu khong thi tao.
+        boolean result = false;
+        /* 1. Model connect Database.
+         -- Khai bao bien va gan null
+         -- Phai dong tat ca cac doi tuong bang moi cach
+         -- Xu ly
+         */
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBHelper.makeConnection();
+            if (con != null) {
+                // 2 model truy van du lieu tu DB 
+                // 2.1 tao cau lenh SQL 
+                // moi menh de cuacau lenh SQl phai viet tren 1 dong 
+                // truoc khi xuong dong phai chen them 1 khoang trang neu khong 
+                // cos loi syntaxFromNear
+                // tat ca cac ten cot phai copy tu DB 
+                // neu khong co loi OBJECT NOT FOUND 
+                String sql = 
+                        "INSERT INTO Registration("
+                        + "username, password, lastname, isAdmin) "
+                        + "VALUES(?,?,?,?)";
+                // 2.2 to den cau lenh la qua trinh nap cau try van vao create statement Object 
+                // check syntax va excute 
+                stm = con.prepareStatement(sql);
+                // 2.3 execture query 
+                stm.setString(1, account.getUsername());
+                stm.setString(2, account.getPassword());
+                stm.setString(3, account.getFullName());
+                stm.setBoolean(4, account.isRole());
                 int effectRows = stm.executeUpdate();
                 if(effectRows > 0){
                     result = true;
