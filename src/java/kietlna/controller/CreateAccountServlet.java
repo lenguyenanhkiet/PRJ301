@@ -44,7 +44,7 @@ public class CreateAccountServlet extends HttpServlet {
         String url = ERROR_PAGE;
         
         // Verify all user'error.
-        //Tao noi chua loi~
+        // Tao noi chua loi~
         RegistrationCreateError error = new RegistrationCreateError();
         boolean foundError = false;
         

@@ -27,31 +27,31 @@
                 ${erros.usernameIsExisted}
                 </font>
             </c:if>
-                <br>
+            <br>
             Password* <input type="password" name="txtPassword" value="" />(6 - 20 chars)<br/>
             <c:if test="${not empty erros.passwordLengthError}">
                 <font color="red">
                 ${erros.passwordLengthError}
                 </font>
             </c:if>
-                <br>
+            <br>
             Confirm* <input type="password" name="txtConfirm" value="" /><br/>
             <c:if test="${not empty erros.confirmNotMatch}">
                 <font color="red">
                 ${erros.confirmNotMatch}
                 </font>
             </c:if>
-                <br>
+            <br>
             Full name* <input type="text" name="txtFullname" value="${param.txtFullname}" />(2 - 50 chars)<br/>
             <c:if test="${not empty erros.fullNameLengthError}">
                 <font color="red">
                 ${erros.fullNameLengthError}
                 </font>
             </c:if>
-                <br>
+            <br>
             <input type="submit" name="btAction" value="Create Account" />
             <input type="reset" name="Reset"/>
         </form>
-            <a href="login.html">Click to back</a>
+        <a href="login.html">Click to back</a>
     </body>
 </html>

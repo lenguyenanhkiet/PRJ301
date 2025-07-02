@@ -5,6 +5,7 @@
 
 package kietlna.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +14,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import kietlna.registration.RegistrationDAO;
+import kietlna.registration.RegistrationUpdateError;
 
 /**
  *
@@ -36,23 +40,43 @@ public class UpdateAccountServlet extends HttpServlet {
         String password = request.getParameter("txtPassword");
         String lastSearchValue = request.getParameter("lastSearchValue");
         boolean isAdmin = request.getParameter("checkAdmin") != null;
+        
+        Map<String,RegistrationUpdateError> errorsMap = new HashMap<>();
+        RegistrationUpdateError error = new RegistrationUpdateError();
+        boolean foundError = false;
         String url = ERROR_PAGE;
         try  {
-            RegistrationDAO dao = new RegistrationDAO();
-            boolean result = dao.updateAccount(username, password, isAdmin);
-            if(result){
-                //refesh = goi lai chuc nang truoc do 1 lan nua.
-                // --> remind  --> add requestParameter dua tren so luong nhap lieu cua control chuc nang truoc do
-                url="DispatchServlet"
-                        + "?btAction=Search"
-                        + "&txtSearchValue="+lastSearchValue;
+            if(password.trim().length() < 6 || 
+                    password.trim().length() > 20){
+                foundError = true;
+                error.setPasswordLengthError("Password is required typing from 6 to 20 characters ");
+                errorsMap.put(username, error);
             }
+            
+            if(foundError){
+                request.setAttribute("UPDATE_ACCOUNT", errorsMap);
+                url = "DispatchServlet"
+                            + "?btAction=Search"
+                            + "&txtSearchValue=" + lastSearchValue;
+            } else {
+                RegistrationDAO dao = new RegistrationDAO();
+                boolean result = dao.updateAccount(username, password, isAdmin);
+                if (result) {
+                    //refesh = goi lai chuc nang truoc do 1 lan nua.
+                    // --> remind  --> add requestParameter dua tren so luong nhap lieu cua control chuc nang truoc do
+                    url = "DispatchServlet"
+                            + "?btAction=Search"
+                            + "&txtSearchValue=" + lastSearchValue;
+                }
+            }
+            
         }catch(SQLException ex){
             log("SQL: " +ex.getMessage());
         }catch(ClassNotFoundException ex){
             log("Class Not Found: " +ex.getMessage());            
         }finally{
-            response.sendRedirect(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     } 
 

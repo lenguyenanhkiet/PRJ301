@@ -19,11 +19,17 @@
         Welcome, ${sessionScope.USER_INFOR.fullName}
         </font>
         <h1>Search Page</h1>
+        <!--Form Search-->
         <form action="DispatchServlet">
             Search Value <input type="text" name="txtSearchValue" 
                                 value="${param.txtSearchValue}" /> <br/>
             <input type="submit" value="Search" name="btAction"/>
-        </form> <br/>
+        </form>
+        <!--Form Logout-->
+        <form action="DispatchServlet">
+            <input type="submit" value="Logout" name="btAction" />
+        </form>
+        <br/>
         <c:set var="searchValue" value="${param.txtSearchValue}"/>
         <c:if test="${not empty searchValue}">
             <c:set var="result" value="${requestScope.SEACH_RESULT}"/>
@@ -50,6 +56,13 @@
                                 </td>
                                 <td>
                                     <input type="text" name="txtPassword" value="${dto.password}" />
+                                    <c:set var="errorsMap" value="${requestScope.UPDATE_ACCOUNT}"/>
+                                    <c:set var="error" value="${errorsMap[dto.username]}"/>
+                                    <c:if test="${not empty error.passwordLengthError}">
+                                        <font color="red">
+                                        ${error.passwordLengthError}
+                                        </font>
+                                    </c:if>
                                 </td>
                                 <td>${dto.fullName}</td>
                                 <td>
@@ -74,11 +87,9 @@
                                     </form>
                                 </td>
                             </tr>
-
                         </c:forEach>
                     </tbody>
                 </table>
-
             </c:if>
             <c:if test="${empty result}">
                 <h2>

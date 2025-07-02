@@ -30,6 +30,7 @@ public class DispatchServlet extends HttpServlet {
      */
     private final String LOGIN_PAGE = "login.html";
     private final String LOGIN_CONTROLLER = "LoginServlet";
+    private final String LOGOUT_CONTROLLER = "LogoutServlet";
     private final String SEARCH_LASTNAME_CONTROLLER ="SearchLastNameServlet";
     private final String DELETE_ACCOUNT_CONTROLLER="DeleteAccountServlet";
     private final String CHECK_ACCOUNT_CONTROLLER = "CheckAccountServlet";
@@ -48,6 +49,9 @@ public class DispatchServlet extends HttpServlet {
                 switch (button) {
                     case "Login":
                         url = LOGIN_CONTROLLER;
+                        break;
+                    case "Logout":
+                        url = LOGOUT_CONTROLLER;
                         break;
                     case "Search":
                         url = SEARCH_LASTNAME_CONTROLLER;
