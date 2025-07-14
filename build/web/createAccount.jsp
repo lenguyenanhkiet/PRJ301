@@ -52,6 +52,6 @@
             <input type="submit" name="btAction" value="Create Account" />
             <input type="reset" name="Reset"/>
         </form>
-        <a href="login.html">Click to back</a>
+        <a href="login.html">Click to return to login</a>
     </body>
 </html>

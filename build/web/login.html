@@ -8,15 +8,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        </style>
     </head>
     <body>
-        <h1>Login</h1>
-        <form action="DispatchServlet" method="POST">
-            Username <input type="text" name="txtUsername" value="" /><br/>
-            Password <input type="password" name="txtPassword" value="" /><br/>
-            <input type="submit" value="Login" name="btAction" />
-            <input type="reset" value="Reset" />
-        </form>
-        <a href="createAccount.html">Sign up</a>
+        <div class="container">
+            <h1>Login</h1>
+            <form class="form-box" action="DispatchServlet" method="POST">
+                <input class="ip-text" type="text" name="txtUsername" value="" placeholder="Username"/><br/>
+                <input class="ip-text" type="password" name="txtPassword" value="" placeholder="Password"/><br/>
+                <input class="ip-btn" type="submit" value="Login" name="btAction" />
+                <input class="ip-btn rs" type="reset" value="Reset" />
+            </form>
+            <a href="createAccount.html">Sign up</a>
+        </div>
+
     </body>
 </html>
